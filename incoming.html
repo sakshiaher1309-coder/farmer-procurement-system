@@ -1,0 +1,261 @@
+<html>
+    <!DOCTYPE html>
+<html>
+<head>
+
+    <title>KisanFlow - Incoming Farmers</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7f5;
+            color: #333;
+        }
+
+        .main {
+            padding: 30px;
+        }
+
+        .header {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .header h1 {
+            color: #1b5e20;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #777;
+        }
+
+        .form-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            max-width: 700px;
+        }
+
+        .form-section h2 {
+            color: #1b5e20;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        button {
+            padding: 13px 25px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        .back-btn {
+            background: #777;
+            margin-left: 10px;
+        }
+
+        .back-btn:hover {
+            background: #555;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="main">
+
+        <div class="header">
+
+            <h1>
+                🚜 Incoming Farmers / ETA
+            </h1>
+
+            <p>
+                Track farmers who are arriving at the procurement centre.
+            </p>
+
+        </div>
+
+
+        <div class="form-section">
+
+            <h2>
+                📋 Enter Incoming Farmer Details
+            </h2>
+
+
+<label>
+    Farmers Village
+</label>
+
+<input
+    type="text"
+    id="farmerName"
+    placeholder="Enter village name"
+>
+
+
+            <label>
+                Farmer ID
+            </label>
+
+            <input
+                type="text"
+                id="farmerId"
+                placeholder="Enter farmer ID"
+            >
+
+
+            <label>
+                Crop
+            </label>
+
+            <select id="crop">
+
+                <option value="">
+                    Select Crop
+                </option>
+
+                <option>
+                    Wheat
+                </option>
+
+                <option>
+                    Rice
+                </option>
+
+                <option>
+                    Soybean
+                </option>
+
+                <option>
+                    Maize
+                </option>
+
+                <option>
+                    Onion
+                </option>
+
+            </select>
+
+
+            <label>
+                Expected Arrival Time (ETA)
+            </label>
+
+            <input
+                type="time"
+                id="eta"
+            >
+
+
+            <label>
+                Status
+            </label>
+
+            <select id="status">
+
+                <option value="">
+                    Select Status
+                </option>
+
+                <option>
+                    On the Way
+                </option>
+
+                <option>
+                    Arrived
+                </option>
+
+                <option>
+                    Delayed
+                </option>
+
+            </select>
+
+
+            <button onclick="saveIncoming()">
+                💾 Save Details
+            </button>
+
+
+            <button
+                class="back-btn"
+                onclick="window.location.href='dashboard.html'"
+            >
+                ← Back to Dashboard
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+function saveIncoming() {
+    let farmerName = document.getElementById("farmerName").value;
+    let farmerId = document.getElementById("farmerId").value;
+    let crop = document.getElementById("crop").value;
+    let eta = document.getElementById("eta").value;
+    let status = document.getElementById("status").value;
+
+    if (farmerName == "" || farmerId == "" || crop == "" || eta == "" || status == "") {
+        alert("Please enter all incoming farmer details!");
+        return;
+    }
+
+    localStorage.setItem("farmersVillage", farmerName);
+    localStorage.setItem("incomingFarmerId", farmerId);
+    localStorage.setItem("incomingCrop", crop);
+    localStorage.setItem("eta", eta);
+    localStorage.setItem("incomingStatus", status);
+
+    alert("Incoming farmer details saved successfully!");
+}
+    </script>
+
+</body>
+</html>

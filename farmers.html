@@ -1,0 +1,234 @@
+<html>
+    <!DOCTYPE html>
+<html>
+<head>
+
+    <title>KisanFlow - Farmer Allocations</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7f5;
+            color: #333;
+        }
+
+        .main {
+            padding: 30px;
+        }
+
+        .header {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .header h1 {
+            color: #1b5e20;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #777;
+        }
+
+        .form-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            max-width: 700px;
+        }
+
+        .form-section h2 {
+            color: #1b5e20;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        button {
+            padding: 13px 25px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        .back-btn {
+            background: #777;
+            margin-left: 10px;
+        }
+
+        .back-btn:hover {
+            background: #555;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="main">
+
+        <div class="header">
+
+            <h1>
+                👨‍🌾 Farmer Allocations
+            </h1>
+
+            <p>
+                Allocate farmers for procurement.
+            </p>
+
+        </div>
+
+
+        <div class="form-section">
+
+            <h2>
+                📋 Enter Farmer Details
+            </h2>
+
+
+            <label>
+                Farmer Name
+            </label>
+
+            <input
+                type="text"
+                id="farmerName"
+                placeholder="Enter farmer name"
+            >
+
+
+            <label>
+                Farmer ID
+            </label>
+
+            <input
+                type="text"
+                id="farmerId"
+                placeholder="Enter farmer ID"
+            >
+
+
+            <label>
+                Select Crop
+            </label>
+
+            <select id="crop">
+
+                <option value="">
+                    Select Crop
+                </option>
+
+                <option>
+                    Wheat
+                </option>
+
+                <option>
+                    Rice
+                </option>
+
+                <option>
+                    Soybean
+                </option>
+
+                <option>
+                    Maize
+                </option>
+
+                <option>
+                    Onion
+                </option>
+
+            </select>
+
+
+            <label>
+                Allocated Quantity (KG)
+            </label>
+
+            <input
+                type="number"
+                id="quantity"
+                placeholder="Enter quantity"
+            >
+
+
+            <button onclick="saveAllocation()">
+                💾 Save Allocation
+            </button>
+
+            <button
+                class="back-btn"
+                onclick="window.location.href='dashboard.html'"
+            >
+                ← Back to Dashboard
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+function saveAllocation() {
+    let name = document.getElementById("farmerName").value;
+    let id = document.getElementById("farmerId").value;
+    let crop = document.getElementById("crop").value;
+    let quantity = document.getElementById("quantity").value;
+
+    if (name == "" || id == "" || crop == "" || quantity == "") {
+        alert("Please enter all farmer details!");
+        return;
+    }
+
+    localStorage.setItem("farmerName", name);
+    localStorage.setItem("farmerId", id);
+    localStorage.setItem("farmerCrop", crop);
+    localStorage.setItem("farmerQuantity", quantity);
+
+    alert("Farmer allocation saved successfully!");
+}
+    </script>
+
+</body>
+</html>

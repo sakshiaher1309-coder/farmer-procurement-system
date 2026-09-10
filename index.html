@@ -1,0 +1,252 @@
+<html>
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>KisanFlow - Centre Login</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e8f5e9, #f5fff6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            width: 500px;
+            min-height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            padding: 55px 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right-section {
+            width: 100%;
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 38px;
+            font-weight: bold;
+            color: #1b5e20;
+            margin-bottom: 35px;
+        }
+
+        .right-section h2 {
+            color: #1b5e20;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .subtitle {
+            color: #777;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2e7d32;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.6s ease;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        /* LOGIN CLICK EFFECT */
+
+        button.rotate {
+            transform: scale(1.15) rotate(360deg);
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 25px;
+            color: #888;
+            font-size: 13px;
+        }
+
+        /* SUCCESS NOTIFICATION */
+
+        .notification {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            background: #2e7d32;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: notificationIn 0.5s ease;
+        }
+
+        @keyframes notificationIn {
+
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="right-section">
+
+            <div class="logo">
+                🌾 KisanFlow
+            </div>
+
+            <h2>
+                Procurement Centre
+            </h2>
+
+            <p class="subtitle">
+                Officer Login
+            </p>
+
+            <label>
+                Centre ID
+            </label>
+
+            <input
+                type="text"
+                id="centreId"
+                placeholder="Enter Centre ID"
+            >
+
+            <label>
+                Password
+            </label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="Enter Password"
+            >
+
+            <button
+                id="loginBtn"
+                onclick="login()"
+            >
+                Login
+            </button>
+
+            <p class="footer-text">
+                KisanFlow • Smart & Transparent Procurement
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function login() {
+
+            let centreId =
+                document.getElementById("centreId").value;
+
+            let password =
+                document.getElementById("password").value;
+
+            if (centreId == "" || password == "") {
+
+                alert("Please enter Centre ID and Password!");
+
+                return;
+            }
+
+
+            let button =
+                document.getElementById("loginBtn");
+
+            button.classList.add("rotate");
+
+            button.innerText = "Logging in...";
+
+
+            /* SUCCESS NOTIFICATION */
+
+            let notification =
+                document.createElement("div");
+
+            notification.className = "notification";
+
+            notification.innerText =
+                "✓ Login Successful!";
+
+            document.body.appendChild(notification);
+
+
+            /* OPEN DASHBOARD */
+
+            setTimeout(function() {
+
+                window.location.href = "dashboard.html";
+
+            }, 1500);
+
+        }
+
+    </script>
+
+</body>
+</html>

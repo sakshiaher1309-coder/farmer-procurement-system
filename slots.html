@@ -1,0 +1,241 @@
+<html>
+    <!DOCTYPE html>
+<html>
+<head>
+
+    <title>KisanFlow - Time Slots</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7f5;
+            color: #333;
+        }
+
+        .main {
+            padding: 30px;
+        }
+
+        .header {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .header h1 {
+            color: #1b5e20;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #777;
+        }
+
+        .form-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            max-width: 700px;
+        }
+
+        .form-section h2 {
+            color: #1b5e20;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        button {
+            padding: 13px 25px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        .back-btn {
+            background: #777;
+            margin-left: 10px;
+        }
+
+        .back-btn:hover {
+            background: #555;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="main">
+
+        <div class="header">
+
+            <h1>
+                🕐 Time-Slot Schedule
+            </h1>
+
+            <p>
+                Schedule procurement time slots for farmers.
+            </p>
+
+        </div>
+
+
+        <div class="form-section">
+
+            <h2>
+                📋 Enter Slot Details
+            </h2>
+
+
+            <label>
+                Farmer Name
+            </label>
+
+            <input
+                type="text"
+                id="farmerName"
+                placeholder="Enter farmer name"
+            >
+
+
+            <label>
+                Farmer ID
+            </label>
+
+            <input
+                type="text"
+                id="farmerId"
+                placeholder="Enter farmer ID"
+            >
+
+
+            <label>
+                Select Date
+            </label>
+
+            <input
+                type="date"
+                id="date"
+            >
+
+
+            <label>
+                Select Time Slot
+            </label>
+
+            <select id="timeSlot">
+
+                <option value="">
+                    Select Time Slot
+                </option>
+
+                <option>
+                    09:00 AM - 10:00 AM
+                </option>
+
+                <option>
+                    10:00 AM - 11:00 AM
+                </option>
+
+                <option>
+                    11:00 AM - 12:00 PM
+                </option>
+
+                <option>
+                    12:00 PM - 01:00 PM
+                </option>
+
+                <option>
+                    02:00 PM - 03:00 PM
+                </option>
+
+                <option>
+                    03:00 PM - 04:00 PM
+                </option>
+
+                <option>
+                    04:00 PM - 05:00 PM
+                </option>
+
+            </select>
+
+
+            <button onclick="saveSlot()">
+                💾 Save Time Slot
+            </button>
+
+            <button
+                class="back-btn"
+                onclick="window.location.href='dashboard.html'"
+            >
+                ← Back to Dashboard
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+function saveSlot() {
+    let farmerName = document.getElementById("farmerName").value;
+    let farmerId = document.getElementById("farmerId").value;
+    let date = document.getElementById("date").value;
+    let timeSlot = document.getElementById("timeSlot").value;
+
+    if (farmerName == "" || farmerId == "" || date == "" || timeSlot == "") {
+        alert("Please enter all slot details!");
+        return;
+    }
+
+    localStorage.setItem("slotFarmerName", farmerName);
+    localStorage.setItem("slotFarmerId", farmerId);
+    localStorage.setItem("slotDate", date);
+    localStorage.setItem("slotTime", timeSlot);
+
+    alert("Time slot saved successfully!");
+}
+    </script>
+
+</body>
+</html>

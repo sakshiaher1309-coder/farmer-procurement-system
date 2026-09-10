@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KisanFlow - Receipt</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e8f5e9, #f5fff6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .receipt {
+            width: 600px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        .receipt-header {
+            background: #2e7d32;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .receipt-header h2 {
+            font-size: 24px;
+        }
+
+        .receipt-header p {
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        .receipt-body {
+            padding: 30px;
+        }
+
+        .success {
+            text-align: center;
+            background: #e8f5e9;
+            color: #1b5e20;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .details {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .details tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .details td {
+            padding: 14px 8px;
+            font-size: 15px;
+        }
+
+        .details td:first-child {
+            font-weight: bold;
+            color: #555;
+            width: 45%;
+        }
+
+        .amount {
+            font-size: 22px !important;
+            color: #2e7d32 !important;
+            font-weight: bold !important;
+        }
+
+        .paid {
+            color: #2e7d32 !important;
+            font-weight: bold !important;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        button {
+            flex: 1;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .print-btn {
+            background: #2e7d32;
+            color: white;
+        }
+
+        .back-btn {
+            background: #e8f5e9;
+            color: #1b5e20;
+        }
+
+        .print-btn:hover {
+            background: #1b5e20;
+        }
+
+        .back-btn:hover {
+            background: #c8e6c9;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .receipt {
+                box-shadow: none;
+                width: 100%;
+            }
+
+            .buttons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="receipt">
+
+        <div class="receipt-header">
+            <div class="logo">🌾 KisanFlow</div>
+            <h2>Procurement Receipt</h2>
+            <p>Nashik Procurement Centre</p>
+        </div>
+
+        <div class="receipt-body">
+
+            <div class="success" id="paymentMessage">
+                ✓ Payment Successful
+            </div>
+
+            <table class="details">
+                <tr>
+                    <td>Receipt No.</td>
+                    <td id="receiptNo"></td>
+                </tr>
+
+                <tr>
+                    <td>Farmer Name</td>
+                    <td id="farmerName"></td>
+                </tr>
+
+                <tr>
+                    <td>Farmers Village</td>
+                    <td id="village"></td>
+                </tr>
+
+                <tr>
+                    <td>Crop / Product</td>
+                    <td id="crop"></td>
+                </tr>
+
+                <tr>
+                    <td>Procurement Quantity</td>
+                    <td id="quantity"></td>
+                </tr>
+
+                <tr>
+                    <td>Procurement Rate</td>
+                    <td id="rate"></td>
+                </tr>
+
+                <tr>
+                    <td>Total Amount</td>
+                    <td class="amount" id="amount"></td>
+                </tr>
+
+                <tr>
+                    <td>Payment Reference ID</td>
+                    <td id="reference"></td>
+                </tr>
+
+                <tr>
+                    <td>Payment Status</td>
+                    <td class="paid" id="status"></td>
+                </tr>
+
+                <tr>
+                    <td>Procurement Date</td>
+                    <td id="date"></td>
+                </tr>
+
+                <tr>
+                    <td>Time Slot</td>
+                    <td id="timeSlot"></td>
+                </tr>
+            </table>
+
+            <div class="footer">
+                Thank you for using KisanFlow 🌾<br>
+                Smart & Transparent Procurement System
+            </div>
+
+            <div class="buttons">
+                <button class="print-btn" onclick="window.print()">
+                    🖨 Print Receipt
+                </button>
+
+                <button class="back-btn" onclick="window.location.href='dashboard.html'">
+                    ← Back to Dashboard
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function getData(key, fallback) {
+            let value = localStorage.getItem(key);
+            return value !== null && value !== "" ? value : fallback;
+        }
+
+        let farmerName = getData("paymentFarmerName",
+                            getData("farmerName", "Not Available"));
+
+        let village = getData("procurementVillage",
+                        getData("farmersVillage", "Not Available"));
+
+        let crop = getData("paymentCrop",
+                     getData("procurementCrop",
+                     getData("farmerCrop",
+                     getData("requirementCrop", "Not Available"))));
+
+        let quantity = getData("paymentQuantity",
+                          getData("procurementQuantity",
+                          getData("farmerQuantity",
+                          getData("totalProcurement", "0"))));
+
+        let rate = getData("procurementRate", "0");
+
+        let amount = getData("paymentAmount", "");
+
+        if (amount === "" && Number(quantity) && Number(rate)) {
+            amount = Number(quantity) * Number(rate);
+        }
+
+        let reference = getData("paymentReference", "Not Available");
+        let status = getData("paymentStatus",
+                      getData("procurementStatus", "Not Available"));
+
+        let date = getData("slotDate", "");
+
+        if (date !== "") {
+            let dateObject = new Date(date + "T00:00:00");
+            date = dateObject.toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            });
+        } else {
+            date = new Date().toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "long",
+                year: "numeric"
+            });
+        }
+
+        let timeSlot = getData("slotTime", "Not Available");
+
+        document.getElementById("receiptNo").innerText =
+            "KF-" + Date.now().toString().slice(-6);
+
+        document.getElementById("farmerName").innerText = farmerName;
+        document.getElementById("village").innerText = village;
+        document.getElementById("crop").innerText = crop;
+        document.getElementById("quantity").innerText = quantity + " KG";
+        document.getElementById("rate").innerText = "₹" + rate + " / KG";
+        document.getElementById("amount").innerText = "₹" + Number(amount).toLocaleString("en-IN");
+        document.getElementById("reference").innerText = reference;
+        document.getElementById("status").innerText = status.toUpperCase();
+        document.getElementById("date").innerText = date;
+        document.getElementById("timeSlot").innerText = timeSlot;
+
+        if (status.toLowerCase() === "paid") {
+            document.getElementById("paymentMessage").innerText =
+                "✓ Payment Successful";
+        } else {
+            document.getElementById("paymentMessage").innerText =
+                "✓ Procurement Receipt Generated";
+        }
+    </script>
+
+</body>
+</html>

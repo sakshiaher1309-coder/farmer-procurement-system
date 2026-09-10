@@ -1,0 +1,278 @@
+<html>
+```html
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>KisanFlow - Payment Status</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7f5;
+            color: #333;
+        }
+
+        .main {
+            padding: 30px;
+        }
+
+        .header {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .header h1 {
+            color: #1b5e20;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #777;
+        }
+
+        .form-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+            max-width: 700px;
+        }
+
+        .form-section h2 {
+            color: #1b5e20;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #2e7d32;
+        }
+
+        button {
+            padding: 13px 25px;
+            background: #2e7d32;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1b5e20;
+        }
+
+        .back-btn {
+            background: #777;
+            margin-left: 10px;
+        }
+
+        .back-btn:hover {
+            background: #555;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="main">
+
+        <div class="header">
+
+            <h1>
+                💰 Payment Status
+            </h1>
+
+            <p>
+                Manage farmer procurement payment details.
+            </p>
+
+        </div>
+
+
+        <div class="form-section">
+
+            <h2>
+                📋 Enter Payment Details
+            </h2>
+
+
+            <label>
+                Farmer Name
+            </label>
+
+            <input
+                type="text"
+                id="farmerName"
+                placeholder="Enter farmer name"
+            >
+
+
+            <label>
+                Crop
+            </label>
+
+            <select id="crop">
+
+                <option value="">
+                    Select Crop
+                </option>
+
+                <option>
+                    Wheat
+                </option>
+
+                <option>
+                    Rice
+                </option>
+
+                <option>
+                    Soybean
+                </option>
+
+                <option>
+                    Maize
+                </option>
+
+                <option>
+                    Onion
+                </option>
+
+            </select>
+
+
+            <label>
+                Procurement Quantity (KG)
+            </label>
+
+            <input
+                type="number"
+                id="quantity"
+                placeholder="Enter quantity"
+            >
+
+
+            <label>
+                Payment Amount (₹)
+            </label>
+
+            <input
+                type="number"
+                id="amount"
+                placeholder="Enter payment amount"
+            >
+
+
+            <label>
+                Payment Reference ID
+            </label>
+
+            <input
+                type="text"
+                id="referenceId"
+                placeholder="Enter payment reference ID"
+            >
+
+
+            <label>
+                Payment Status
+            </label>
+
+            <select id="status">
+
+                <option value="">
+                    Select Status
+                </option>
+
+                <option>
+                    Pending
+                </option>
+
+                <option>
+                    Processing
+                </option>
+
+                <option>
+                    Paid
+                </option>
+
+            </select>
+
+
+            <button onclick="savePayment()">
+                💾 Save Payment
+            </button>
+
+
+            <button
+                class="back-btn"
+                onclick="window.location.href='dashboard.html'"
+            >
+                ← Back to Dashboard
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+function savePayment() {
+    let farmerName = document.getElementById("farmerName").value;
+    let crop = document.getElementById("crop").value;
+    let quantity = document.getElementById("quantity").value;
+    let amount = document.getElementById("amount").value;
+    let referenceId = document.getElementById("referenceId").value;
+    let status = document.getElementById("status").value;
+
+    if (farmerName == "" || crop == "" || quantity == "" || amount == "" || referenceId == "" || status == "") {
+        alert("Please enter all payment details!");
+        return;
+    }
+
+    localStorage.setItem("paymentFarmerName", farmerName);
+    localStorage.setItem("paymentCrop", crop);
+    localStorage.setItem("paymentQuantity", quantity);
+    localStorage.setItem("paymentAmount", amount);
+    localStorage.setItem("paymentReference", referenceId);
+    localStorage.setItem("paymentStatus", status);
+
+    alert("Payment details saved successfully!");
+}
+    </script>
+
+</body>
+</html>
+```
+
