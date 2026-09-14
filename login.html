@@ -1,0 +1,388 @@
+<html>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Animated Login Register</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #e9e4ef, #cfd9d8);
+}
+
+/* MAIN BOX */
+
+.container {
+    width: 850px;
+    height: 520px;
+    position: relative;
+    overflow: hidden;
+    background: #eee4e7;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+/* FORM AREA */
+
+.form-box {
+    width: 50%;
+    height: 100%;
+    padding: 55px 50px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: 0.7s;
+}
+
+.form-box h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #222;
+}
+
+/* INPUT */
+
+.input-box {
+    margin: 20px 0;
+    position: relative;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 14px 15px;
+    border: none;
+    outline: none;
+    background: #e5d9dd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.input-box input::placeholder {
+    color: #555;
+}
+
+/* BUTTON */
+
+.btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    background: #7551b5;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background: #62409b;
+}
+
+/* SOCIAL */
+
+.social-text {
+    text-align: center;
+    margin: 20px 0 12px;
+    font-size: 13px;
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.social span {
+    width: 38px;
+    height: 38px;
+    border: 1px solid #999;
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+/* PURPLE PANEL */
+
+.purple-panel {
+    width: 52%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: linear-gradient(135deg, #7952b8, #6945a5);
+    color: white;
+    z-index: 5;
+
+    border-radius: 0 180px 180px 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transition: 0.7s;
+}
+
+.purple-panel h1 {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.purple-panel p {
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.switch-btn {
+    padding: 11px 40px;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* LOGIN MODE */
+
+.login-form {
+    display: block;
+}
+
+.register-form {
+    display: none;
+}
+
+/* WHEN REGISTER IS ACTIVE */
+
+.container.register-active .purple-panel {
+    left: 48%;
+    border-radius: 180px 0 0 180px;
+}
+
+.container.register-active .form-box {
+    left: 0;
+    right: auto;
+}
+
+.container.register-active .login-form {
+    display: none;
+}
+
+.container.register-active .register-form {
+    display: block;
+}
+
+/* MOBILE */
+
+@media(max-width: 700px) {
+
+    .container {
+        width: 92%;
+        height: 550px;
+    }
+
+    .purple-panel {
+        width: 100%;
+        height: 45%;
+        left: 0;
+        top: 0;
+
+        border-radius: 0 0 100px 100px;
+    }
+
+    .form-box {
+        width: 100%;
+        height: 55%;
+        top: 45%;
+        padding: 25px 30px;
+    }
+
+    .purple-panel h1 {
+        font-size: 24px;
+    }
+
+    .container.register-active .purple-panel {
+        left: 0;
+        top: 55%;
+        border-radius: 100px 100px 0 0;
+    }
+
+    .container.register-active .form-box {
+        top: 0;
+        width: 100%;
+        height: 55%;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container" id="container">
+
+    <!-- PURPLE PANEL -->
+
+    <div class="purple-panel">
+
+        <h1 id="panelTitle">
+            Hello, Welcome!
+        </h1>
+
+        <p id="panelText">
+            Don't have an account?
+        </p>
+
+        <button class="switch-btn" onclick="showRegister()">
+            Register
+        </button>
+
+    </div>
+
+
+    <!-- FORM AREA -->
+
+    <div class="form-box">
+
+        <!-- LOGIN -->
+
+        <div class="login-form">
+
+            <h1>Login</h1>
+
+            <div class="input-box">
+                <input type="text" placeholder="Username">
+            </div>
+
+            <div class="input-box">
+                <input type="password" placeholder="Password">
+            </div>
+
+            <div style="text-align:center; font-size:13px; margin:10px;">
+                Forgot Password?
+            </div>
+
+            <button class="btn">
+                Login
+            </button>
+
+            <div class="social-text">
+                or login with social platforms
+            </div>
+
+            <div class="social">
+                <span>G</span>
+                <span>f</span>
+                <span>◉</span>
+                <span>in</span>
+            </div>
+
+        </div>
+
+
+        <!-- REGISTRATION -->
+
+        <div class="register-form">
+
+            <h1>Registration</h1>
+
+            <div class="input-box">
+                <input type="text" placeholder="Username">
+            </div>
+
+            <div class="input-box">
+                <input type="email" placeholder="Email">
+            </div>
+
+            <div class="input-box">
+                <input type="password" placeholder="Password">
+            </div>
+
+            <button class="btn">
+                Register
+            </button>
+
+            <div class="social-text">
+                or register with social platforms
+            </div>
+
+            <div class="social">
+                <span>G</span>
+                <span>f</span>
+                <span>◉</span>
+                <span>in</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function showRegister() {
+
+    let container = document.getElementById("container");
+
+    container.classList.add("register-active");
+
+    document.getElementById("panelTitle").innerText =
+        "Welcome Back!";
+
+    document.getElementById("panelText").innerText =
+        "Already have an account?";
+
+    document.querySelector(".switch-btn").innerText =
+        "Login";
+
+    document.querySelector(".switch-btn").onclick =
+        showLogin;
+}
+
+
+function showLogin() {
+
+    let container = document.getElementById("container");
+
+    container.classList.remove("register-active");
+
+    document.getElementById("panelTitle").innerText =
+        "Hello, Welcome!";
+
+    document.getElementById("panelText").innerText =
+        "Don't have an account?";
+
+    document.querySelector(".switch-btn").innerText =
+        "Register";
+
+    document.querySelector(".switch-btn").onclick =
+        showRegister;
+}
+
+</script>
+
+</body>
+</html>
