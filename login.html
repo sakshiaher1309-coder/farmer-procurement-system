@@ -283,9 +283,9 @@ body {
                 Forgot Password?
             </div>
 
-            <button class="btn">
-                Login
-            </button>
+           <button type="button" class="btn" id="loginBtn">
+    Login
+</button>
 
             <div class="social-text">
                 or login with social platforms
@@ -319,9 +319,9 @@ body {
                 <input type="password" placeholder="Password">
             </div>
 
-            <button class="btn">
-                Register
-            </button>
+            <button type="button" class="btn" id="registerBtn">
+    Register
+</button>
 
             <div class="social-text">
                 or register with social platforms
@@ -355,11 +355,10 @@ function showRegister() {
     document.getElementById("panelText").innerText =
         "Already have an account?";
 
-    document.querySelector(".switch-btn").innerText =
-        "Login";
+    let switchBtn = document.querySelector(".switch-btn");
 
-    document.querySelector(".switch-btn").onclick =
-        showLogin;
+    switchBtn.innerText = "Login";
+    switchBtn.onclick = showLogin;
 }
 
 
@@ -375,14 +374,61 @@ function showLogin() {
     document.getElementById("panelText").innerText =
         "Don't have an account?";
 
-    document.querySelector(".switch-btn").innerText =
-        "Register";
+    let switchBtn = document.querySelector(".switch-btn");
 
-    document.querySelector(".switch-btn").onclick =
-        showRegister;
+    switchBtn.innerText = "Register";
+    switchBtn.onclick = showRegister;
 }
 
-</script>
 
+/* REGISTRATION */
+
+document.getElementById("registerBtn").addEventListener("click", function() {
+
+    let inputs = document.querySelectorAll(".register-form input");
+
+    let username = inputs[0].value.trim();
+    let email = inputs[1].value.trim();
+    let password = inputs[2].value.trim();
+
+    if (username === "" || email === "" || password === "") {
+
+        alert("Please fill all details!");
+
+        return;
+    }
+
+    alert("Registration Successful! 🎉");
+
+    // Clear registration fields
+    inputs[0].value = "";
+    inputs[1].value = "";
+    inputs[2].value = "";
+
+    // Show Login form
+    showLogin();
+
+});
+function loginUser() {
+
+    let inputs = document.querySelectorAll(".login-form input");
+
+    let username = inputs[0].value.trim();
+    let password = inputs[1].value.trim();
+
+    if (username === "" || password === "") {
+
+        alert("Please enter Username and Password!");
+
+        return;
+    }
+
+    alert("Login Successful! 🎉");
+window.location.href = "dashboard.html";
+
+}
+
+document.getElementById("loginBtn").addEventListener("click", loginUser);
+</script>
 </body>
 </html>
